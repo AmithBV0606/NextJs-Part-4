@@ -121,7 +121,7 @@ This becomes really inefficient when some parts of your app are slower than othe
 
 Use the `<Suspense>` component to unlock two major SSR features : 
 
-1. HTML streaming on the server.
+1. <ins>**HTML streaming on the server**</ins>
 
 <img src="./assets/Pic-4.png" />
 
@@ -153,7 +153,7 @@ Use the `<Suspense>` component to unlock two major SSR features :
 
 - The browser can download React and most of your app's code independently, without getting stuck waiting for that main section's code.
 
-2. Selective hydration on the client.
+2. <ins>**Selective hydration on the client**</ins>
 
 - By wrapping your main section in a `<Suspense>` component, you're not just enabling streaming but also telling React it's okay to hydrate other parts of the page before everything's ready.
 
@@ -311,3 +311,17 @@ CSR --> SSR --> Suspense for SSR
 - They can also get an initial server render for faster page loads.
 
 <ins>**NOTE :**</ins> The app router in next.js is built entirely on the RSC architecture.
+
+## Server and Client Components (Practical)
+
+### RSC + Next.js 
+
+- In the RSC architecture and by extension it the next.js app router, Every component in a Next.js app defaults to being a server components.
+
+- Running components on the server brings several advantages : zero-bundle size, direct access to server-side resources, improved security and better SEO.
+
+- Server components can't interact with browser APIs or handle user interactions.
+
+- To create a client component, add "use client" directive at the top of the file.
+
+- Server components are rendered exclusively on the server and client components are rendered once on the server and then on the client.

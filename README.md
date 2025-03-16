@@ -325,3 +325,28 @@ CSR --> SSR --> Suspense for SSR
 - To create a client component, add "use client" directive at the top of the file.
 
 - Server components are rendered exclusively on the server and client components are rendered once on the server and then on the client.
+
+## Rendering Lifecycle in RSCs 
+
+- We're going to learn about the rendering lifecycle of server and client components.
+
+- In simpler terms, we'll explore how they come to life on your screen.
+
+- When we talk about React Server Components (RSC), we're dealing with 3 key player : 
+
+    - Your browser(the client)
+    - Next.js (Our framework)
+    - React (Our Library)
+
+### RSC Initial loading sequence
+
+<img src="./assets/Pic-6.png" />
+
+### RSC Update sequence
+<img src="./assets/Pic-7.png" />
+
+### Server rendering strategies : 
+
+1. Static rendering
+2. Dynamic rendering
+3. Streaming

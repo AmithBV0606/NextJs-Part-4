@@ -400,3 +400,43 @@ CSR --> SSR --> Suspense for SSR
 - Direct route visits serve HTML files.
 - Client-side navigation uses RSC payloads and JavaScript chunks without additional server requests.
 - Static rendering is great for performance, especially in blogs, documentation, and marketing pages.
+
+## Dynamic Rendering
+
+- Dynamic rendering is a server rendering strategy where routes are rendered uniquely for each user when they make a request.
+
+- It is useful when you need to show personalized data or information that's only available at request time(and not ahead of time during pre-rendering) - things like cookies or URL search parameters.
+
+- News websites, personalized shopping pages, and social media feeds are some examples where dynamic rendering is beneficial.
+
+### <ins>How to dynamically render</ins>
+
+- Next.js automatically switches to dynamic rendering for an entire route when it detects what we call a "dynamic function" or "dynamic API".
+
+- In Next.js, these dynamic functions are:
+
+    - `cookies()`
+    - `headers()`
+    - `connection()`
+    - `draftMode()`
+    - `searchParams prop`
+    - `after()`
+
+- Using any of these automatically opts your entire route into dynamic rendering at request time.
+
+- Dynamically rendered pages are generated during the build time.
+
+- You don't have to stress about choosing between static and dynamic rendering.
+
+- Next.js automatically selects the optimal rendering strategy for each route based on the features and APIs you're using.
+
+- But if you want to force a route to be dynamically rendered, you can use the following config at the top of your page.
+
+```js
+const dynamic = 'force-dynamic';
+```
+
+**NOTE :**
+
+    ○  (Static)   prerendered as static content
+    ƒ  (Dynamic)  server-rendered on demand

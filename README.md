@@ -350,3 +350,53 @@ CSR --> SSR --> Suspense for SSR
 1. Static rendering
 2. Dynamic rendering
 3. Streaming
+
+## Static Rendering
+
+- Static rendering is a server rendering strategy where we generate HTML pages when building our application.
+
+- Think of it as preparing all your content in advance - before any user visits your site.
+
+- Once built, these pages can be cached by CDNs and served instantly to users.
+
+- With this approach, the same pre-rendered page can be shared among different users, giving your app a significant performance boost.
+
+- Static rendering is perfect for things like blog posts, e-commerce product listings, documentation, and marketing pages.
+
+### <ins>How to statically render?</ins>
+
+- Static rendering is the default strategy in the app router.
+
+- All routes are automatically prepared at build time without any additional setup.
+
+- But the question is we haven't really built our application yet, right? We're just running it in development mode.
+
+### <ins>Production Server</ins> Vs <ins>Development Server</ins>
+
+- In production, we create one optimized build and deploy it - no on-the-fly changes after deployment.
+
+- A deployment server, on the other hand, focuses on the developer experience.
+
+- We need to see our changes immediately in the browser without rebuilding the app every time.
+
+- In production, pages are pre-rendered once during the build.
+
+- In development, pages are pre-rendered on every request.
+
+**NOTE :** rsc files are essential for building the UI on the client side, when we navigate to different routes.
+
+### Prefetching
+
+- Prefetching is a technique that preloads routes in the background as their links become visible.
+
+- For static routes like ours, Next.js automatically prefetches and caches the whole route.
+
+- When our home page loads, Next.js is already prefetching about and dashboard routes for instant navigation.
+
+### Static rendering summary
+
+- Static rendering is a strategy where the HTML is generated at build time.
+- Along with the HTML, RSC payloads for components and JavaScript chunks for client-side hydration are created.
+- Direct route visits serve HTML files.
+- Client-side navigation uses RSC payloads and JavaScript chunks without additional server requests.
+- Static rendering is great for performance, especially in blogs, documentation, and marketing pages.

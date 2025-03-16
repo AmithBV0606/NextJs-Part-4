@@ -14,6 +14,8 @@ export default function Home() {
           priority
         />
         <Link href={"/dashboard"} className="underline mx-auto">Dashboard</Link>
+        <Link href={"/about"} className="underline mx-auto">About</Link>
+
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}

@@ -383,7 +383,17 @@ CSR --> SSR --> Suspense for SSR
 
 - In development, pages are pre-rendered on every request.
 
-**NOTE :** rsc files are essential for building the UI on the client side, when we navigate to different routes.
+**NOTE :** 
+
+1. Next.js also displays a static route indicator during development to help you identify the static routes.
+
+2. To see the indicator, run "npm run build".
+
+<img src="./assets/Pic-8.png" />
+
+3. Route is route itself, "Size" shows how much data needs to be downloaded while navigating to that corresponding page client side in the browser and finally "First Load JS" tlls us how much gets downloaded when initially loading a page from the server.
+
+4. rsc files are essential for building the UI on the client side, when we navigate to different routes.
 
 ### Prefetching
 
@@ -424,12 +434,17 @@ CSR --> SSR --> Suspense for SSR
 
 - Using any of these automatically opts your entire route into dynamic rendering at request time.
 
-- Dynamically rendered pages are generated during the build time.
+<img src="./assets/Pic-9.png" />
 
+- Dynamically rendered pages aren't generated during the build time.
+
+### <ins>Dynamic rendering summary</ins>
+
+- Dynamic rendering is a strategy where the HTML is generated at request time.
+- - Next.js automatically enables it when it encounters dynamic functions like cookies, headers, connection, draftMode, after or searchParams prop.
+- It's great for personalized content like social media feeds.
 - You don't have to stress about choosing between static and dynamic rendering.
-
 - Next.js automatically selects the optimal rendering strategy for each route based on the features and APIs you're using.
-
 - But if you want to force a route to be dynamically rendered, you can use the following config at the top of your page.
 
 ```js
@@ -440,3 +455,6 @@ const dynamic = 'force-dynamic';
 
     ○  (Static)   prerendered as static content
     ƒ  (Dynamic)  server-rendered on demand
+
+## generateStaticParams
+

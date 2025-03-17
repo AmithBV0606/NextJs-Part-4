@@ -534,6 +534,8 @@ export default async function ProductId({
 export async function generateStaticParams() {
   return [{ id: "1" }, { id: "2" }, { id: "3" }];
 }
+
+// Each object represents a route we want to pre-render with the object key corresponding to a route's dynamic segment.
 ```
 
 - This function runs during build time and will pre-renders the product details pages for all 3 featured products.
@@ -558,3 +560,29 @@ export async function generateStaticParams() {
 ```
 
 - `generateStaticParams` is a powerfull feature in Next.js, that lets you pre-render static routes for dynamic segments.
+
+## dynamicParams
+
+- Control what happens when a dynamic segment is visited that was not generated with `generateStaticParams()`.
+
+```js
+export const dynamicParams = false;
+```
+
+- by default `dynamicParams` is set to true - Next.js will statically render pages on demand for any dynamic segments that are not included in `generateStaticParams()`.
+
+- false - Next.js will return a 404 error for any dynamic segments not included in our pre-rendered list.
+
+### Use cases : 
+
+<ins>**true :**</ins>
+
+- If you're building an e-commerce site, you'll probably want to keep dynamicParams set to true.
+
+- This way, you can pre-render your most popular product pages for better performance, but still allow access to all your other products – they'll just be rendered on demand.
+
+<ins>**false :**</ins>
+
+- If you're working with something like a blog where you have a smaller, more fixed number of pages, you can pre-render all of them and set dynamicParams to false.
+
+- If someone tries to access a blog post that doesn't exist, they'll get a clean 404 error instead of waiting for a page that will never exist.

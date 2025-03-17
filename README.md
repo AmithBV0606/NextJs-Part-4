@@ -458,3 +458,103 @@ const dynamic = 'force-dynamic';
 
 ## generateStaticParams
 
+- generateStaticParams is a function that :
+
+    - Works alongside dynamic route segments.
+    - To generate static routes during the build time.
+    - Instead of on demand at request time.
+    - Giving us a nice performance boost.
+
+### Demo 
+
+- Create a folder named `products` and create a `page.tsx` file inside it.
+
+```js
+// products/page.tsx
+import Link from "next/link";
+
+export default function ProductsPage() {
+  return (
+    <div className="flex flex-col gap-5">
+      <h1 className="text-2xl font-bold underline">Featured Products</h1>
+
+      <Link href={"/products/1"} className="underline">
+        Product 1
+      </Link>
+      <Link href={"/products/2"} className="underline">
+        Product 2
+      </Link>
+      <Link href={"/products/3"} className="underline">
+        Product 3
+      </Link>
+    </div>
+  );
+}
+```
+
+- Inside `products` folder, create another dynamic folder named `[id]` and create a `page.tsx` file inside it.
+
+```js
+// products/[id]/page.tsx
+export default async function ProductId({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  console.log(id);
+
+  return (
+    <div>
+      <h1 className="text-2xl font-bold">
+        Product {id} details rendered at {new Date().toLocaleTimeString()}
+      </h1>
+    </div>
+  );
+}
+```
+
+- Now run `npm run build`
+
+<img src="./assets/Pic-10.png" />
+
+- If you notice carefully, Next.js handles `/products`(Product list page) and `products/[id]`(Product details page) routes differently.
+
+- `/products` gets statically rendered and `/products/[id]` gets dynamically rendered.
+
+- But from our previous learnings we know that static rendering gives us better performance. 
+
+- It would be great if we could tell next.js to pre-render at least our featured products details page(`/products/[id]`) i.e Product 1, Product 2 and Product 3.
+
+- That is what exactly `generateStaticParams` helps us with. 
+
+- Add the following code, above the `ProductId` function inside the `products/[id]/page.tsx`.
+
+```js
+export async function generateStaticParams() {
+  return [{ id: "1" }, { id: "2" }, { id: "3" }];
+}
+```
+
+- This function runs during build time and will pre-renders the product details pages for all 3 featured products.
+
+<img src="./assets/Pic-11.png" />
+
+### Multiple dynamic route segments
+
+- Suppose we have a product catalog with categories and products
+
+```js
+// /products/[category]/[product]/page.tsx
+
+export async function generateStaticParams() {
+  return [
+    { category: "electronics", product: "smartphone" },
+    { category: "electronics", product: "laptop" },
+    { category: "books", product: "science-fiction" },
+    { category: "books", product: "biography" },
+  ];
+}
+```
+
+- `generateStaticParams` is a powerfull feature in Next.js, that lets you pre-render static routes for dynamic segments.
